@@ -14,6 +14,43 @@
 
 [初始化](initialize.txt)、[存量减负](retrofit.txt)和[文字处理](writing.txt)按任务读取，不全部放进项目常驻规则。项目只保留必要约定和真实运行方式，不复制研究报告。文字处理保留专业术语、数值对应及必要限制；不把禁词表当成语义检查器。
 
+## 一次启用常驻约束
+
+对 Agent 说：“使用太易，让当前项目以后持续遵守开发、文字和增长约束。”技能会按以下步骤完成接入。无需后台守护进程；规则随项目保存，hook 在每次普通提交时执行。
+
+以下命令从目标项目运行，先将 `YI` 设为太易仓库的绝对路径：
+
+```sh
+python3 -m venv .cache/ratchet-env
+.cache/ratchet-env/bin/python -m pip install ratchet-size==0.2.3
+.cache/ratchet-env/bin/python "$YI/scripts/resident.py" enable
+```
+
+启用器把 YI 约定追加到带标记的项目规则区块，优先使用已有 `AGENTS.override.md`，否则使用 `AGENTS.md`；已有 `CLAUDE.md` 时也接入。它复制预算工具到 `.yi/yi.py`，将旧 pre-commit 原样备份并串联执行，不覆盖其他 hook。不改用户级配置，也不自动暂存或提交。
+
+**首次基线还没有暂存时，enable 返回 1 并说明缺什么，这是已安装、尚未就绪。** Agent 应继续审阅并明确暂存实际项目文件、`.yi/yi.py` 和被更新的规则，然后初始化预算并暂存配置：
+
+```sh
+# 先 git add 明确选择的项目文件和上述安装文件；不要盲目 add -A。
+.cache/ratchet-env/bin/python .yi/yi.py init
+# 核对分组与 outside_budget 后：
+git add .ratchet.json
+.cache/ratchet-env/bin/python "$YI/scripts/resident.py" status
+```
+
+已有预算时跳过 init，保留原统计范围；安装引起的增长按授权记录，不重新初始化绕过额度。`status` 核对安装文件、规则区块、hook、依赖和暂存配置是否存在；预算是否通过另用 `.yi/yi.py check`。启用完成后开始新 Agent 会话。不同客户端加载行为有差异，启用不会宣称已验证客户端理解或语义遵循。
+
+```sh
+# 检查持久安装；修改或丢失会明确报告
+.cache/ratchet-env/bin/python "$YI/scripts/resident.py" status
+# 撤销 YI 安装，恢复旧 hook；保留预算与依赖环境
+.cache/ratchet-env/bin/python "$YI/scripts/resident.py" disable
+```
+
+重复 enable 不重复添加规则。若安装内容被用户改过，disable 拒绝静默删除，先保留现场；规则区块外的用户补充会留下。新克隆缺少本地 hook，可准备环境后再 enable，已有相同安装文件会复用。链接规则文件、已存在但不同的工具、仓库外共享 hooksPath 和 linked worktree 需要明确集成，启用器在写入前拒绝猜测处理。当前启用器面向普通 Git 检出与 POSIX shell。
+
+这是持久的项目级约束：Git 负责预算阻断，Agent 负责语义判断。去黑话、模块职责与重复防御不由行数工具裁定。没有提交的编辑不会触发 Git hook；远端保护仍需在托管服务配置。
+
 ## 可执行预算
 
 需要 Python 3.10+、Git；下面命令从目标项目根目录运行，`YI` 表示本仓库的绝对路径：
