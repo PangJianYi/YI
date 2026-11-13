@@ -1,0 +1,16 @@
+{
+  "project": "太易 (YI)",
+  "release_type": "fresh-history privacy-cleaned source",
+  "validation": {
+    "tests_passed": 10,
+    "command": ".cache/ratchet-env/bin/python -m unittest discover -s tests -v",
+    "budget": "initial staged baseline verified",
+    "privacy": "content, author metadata and reachable objects checked; no prior repository history included"
+  },
+  "not_claimed": [
+    "long-term effectiveness",
+    "independent model evaluation",
+    "approval identity authentication"
+  ],
+  "historical_case": "examples/continuous-use.md summarizes prior developer observations; original private histories are not distributed"
+}

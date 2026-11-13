@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+root=$(git rev-parse --show-toplevel)
+exec "$root/.cache/ratchet-env/bin/python" "$root/scripts/yi.py" -C "$root" check
