@@ -2,7 +2,7 @@
   "project": "太易 (YI)",
   "release_type": "fresh-history privacy-cleaned source",
   "validation": {
-    "tests_passed": 10,
+    "tests_passed": 17,
     "command": ".cache/ratchet-env/bin/python -m unittest discover -s tests -v",
     "budget": "initial staged baseline verified",
     "privacy": "content, author metadata and reachable objects checked; no prior repository history included"
@@ -12,5 +12,18 @@
     "independent model evaluation",
     "approval identity authentication"
   ],
-  "historical_case": "examples/continuous-use.md summarizes prior developer observations; original private histories are not distributed"
+  "historical_case": "examples/continuous-use.md summarizes prior developer observations; original private histories are not distributed",
+  "persistent_activation": {
+    "verified": [
+      "real git commit rejects growth in a later process",
+      "existing hook executes and is restored",
+      "repeat enable does not duplicate rules",
+      "rule additions outside managed block survive uninstall",
+      "modified installed code is preserved",
+      "existing override and Claude instructions handled",
+      "fresh clone can reactivate tracked installation",
+      "new overriding instruction file is reported"
+    ],
+    "boundary": "instruction files are persistent context, not enforced semantics; POSIX ordinary Git checkouts tested"
+  }
 }

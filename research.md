@@ -127,3 +127,9 @@ Claude Code 官方说明中，直接读取 AGENTS.md 受版本和设置影响；
 [Interaction-as-a-Judge](https://arxiv.org/abs/2610.17895)报告，在交互应用生成的训练实验中，交互评价奖励相比代码评价奖励减少生成代码长度 35.7%。这不是对冗余代码的直接标注，更不是存量科研项目维护成本的降幅。该工作提示评价应关注真实交互结果，不能为 YI 的效果提供替代证据。
 
 YI 当前范围检查验证配置顺序与内容、将 grant 对应到确切范围；它不认证批准者。能够同时改检查器与日志的主体仍可伪造记录。分支保护要求已配置的检查通过，但不能单凭 CI 绿色推出存在独立批准。
+
+## 持久启用的加载与执行边界
+
+[Codex 官方规则说明](https://learn.chatgpt.com/docs/agent-configuration/agents-md)将项目规则作为会话启动时加载的指令，并规定 AGENTS.override.md 优先；[Claude Code 说明](https://code.claude.com/docs/en/memory)区分 CLAUDE.md、AGENTS.md 的加载条件。YI 因此把长期偏好写入客户端能够读取的项目文件，避免仅依靠一次技能调用。启用器不证明模型遵循，只验证文件和执行入口确实存在且未被修改。
+
+[Git hook](https://git-scm.com/docs/githooks)在事件发生时运行，适合机械约束。YI 将旧 hook 原样保留并先执行，再执行预算检查；不引入常驻进程或每次编辑重跑全仓审查。新克隆需要重新安装本地 hook，规则与工具可随仓库分发。启用、状态检查和卸载通过实际临时仓库与新进程中的提交验证。
