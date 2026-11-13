@@ -25,5 +25,6 @@
       "new overriding instruction file is reported"
     ],
     "boundary": "instruction files are persistent context, not enforced semantics; POSIX ordinary Git checkouts tested"
-  }
+  },
+  "development_workflow": "main-only development; local pre-commit budget; post-push CI; no force pushes or main deletion"
 }
