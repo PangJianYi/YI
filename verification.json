@@ -26,5 +26,23 @@
     ],
     "boundary": "instruction files are persistent context, not enforced semantics; POSIX ordinary Git checkouts tested"
   },
-  "development_workflow": "main-only development; local pre-commit budget; post-push CI; no force pushes or main deletion"
+  "development_workflow": "main-only development; local pre-commit budget; post-push CI; no force pushes or main deletion",
+  "conversation_guidance": {
+    "change": "standing instructions are followed silently; actual new messages determine new user intent",
+    "live_check": {
+      "client": "Qoder CLI CN 1.1.88",
+      "model_alias": "qmodel_latest",
+      "thinking": "disabled",
+      "task": "Read first.txt then second.txt and return the result",
+      "tool_calls": [
+        "Read",
+        "Read"
+      ],
+      "assistant_text": [
+        "结果：37。"
+      ],
+      "exit_code": 0
+    },
+    "limits": "one fresh-session smoke test; no before/after causal trial and no claim that the original long-context trigger has been located"
+  }
 }
